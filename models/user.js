@@ -1,8 +1,27 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-});
+// Define schema for user-admin collection
+const UserSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      default: 'admin', // Set default role as 'admin'
+    },
+  },
+  {
+    timestamps: true, // Automatically add createdAt and updatedAt fields
+  }
+);
 
-module.exports = mongoose.model('User', userSchema,'user-admin');
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
