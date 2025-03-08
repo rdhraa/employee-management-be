@@ -1,4 +1,5 @@
 const Employee = require('../models/employee');
+const mongoose = require('mongoose');
 
 const addEmployee = async (req, res) => {
   const { name, email, phone, department } = req.body;
@@ -64,6 +65,9 @@ const getEmployees = async (req, res) => {
 const updateEmployee = async (req, res) => {
   const { id } = req.params;
   const { name, email, phone, department } = req.body;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid employee ID format' });
+  }
 
   try {
     const updatedEmployee = await Employee.findByIdAndUpdate(
@@ -83,9 +87,12 @@ const updateEmployee = async (req, res) => {
   }
 };
 
-
 const deleteEmployee = async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid employee ID format' });
+  }
 
   try {
     const deletedEmployee = await Employee.findByIdAndDelete(id);
@@ -100,7 +107,6 @@ const deleteEmployee = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete employee', details: err.message });
   }
 };
-
 module.exports = {
   addEmployee,
   getEmployees,
