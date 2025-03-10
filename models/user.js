@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define schema for user-admin collection
 const UserSchema = new mongoose.Schema(
   {
     email: {
@@ -14,11 +13,11 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: 'admin', // Set default role as 'admin'
+      default: 'admin', 
     },
   },
   {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
+    timestamps: true, 
   }
 );
 

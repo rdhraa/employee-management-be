@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-
-// Define the Employee schema
 const employeeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true, // Remove any leading or trailing spaces
+    trim: true, 
   },
   email: {
     type: String,
@@ -18,13 +16,13 @@ const employeeSchema = new mongoose.Schema({
     type: String,
     required: true,
     match: [/^\d{10}$/, 'Please enter a valid phone number'],
-    trim: true, // Remove any leading or trailing spaces
+    trim: true, 
   },
   department: {
     type: String,
     required: true,
     enum: ['HR', 'Engineering', 'Marketing', 'Sales', 'Designer'],
-    set: val => val.charAt(0).toUpperCase() + val.slice(1).toLowerCase(), // Capitalize first letter
+    set: val => val.charAt(0).toUpperCase() + val.slice(1).toLowerCase(), 
   },
   hireDate: {
     type: Date,
